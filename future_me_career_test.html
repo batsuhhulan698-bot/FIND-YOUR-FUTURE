@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="mn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Future Me — Мэргэжил өөрийгөө таних тест</title>
+<style>
+:root{--pink:#d95f9d;--pink2:#f8dceb;--lav:#9b88dc;--ink:#30283a;--muted:#766d80;--paper:#fff;--bg:#fff8fc;--line:#eee2ed;--mint:#e5f4ef}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(140deg,#fff8fc,#f6f2ff 65%,#fff9f0);color:var(--ink);font-family:Inter,"Segoe UI",Arial,sans-serif;line-height:1.6}
+header{display:flex;align-items:center;justify-content:space-between;padding:17px max(20px,calc((100% - 1040px)/2));background:#ffffffd9;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:3;backdrop-filter:blur(12px)}
+.logo{font-size:21px;font-weight:850;color:#c64f8c;letter-spacing:-.5px}.logo span{color:#a18bdb}.navnote{font-size:12px;color:var(--muted)}
+main{max-width:940px;margin:0 auto;padding:22px 18px 60px}.hero{text-align:center;padding:42px 15px 28px}.eyebrow{display:inline-block;border-radius:99px;padding:6px 13px;background:#ffe8f3;color:#a73c76;font-size:12px;font-weight:800;letter-spacing:.7px}
+h1{font-size:clamp(32px,6vw,52px);line-height:1.12;letter-spacing:-1.6px;margin:18px 0 14px}.hero p{max-width:700px;margin:0 auto;color:var(--muted);font-size:16px}
+.hero-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:760px;margin:27px auto}.mini{background:#ffffffc9;border:1px solid var(--line);border-radius:16px;padding:14px;font-size:13px;color:var(--muted)}.mini strong{display:block;color:var(--ink);font-size:15px;margin-bottom:3px}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:23px;padding:clamp(19px,4vw,32px);box-shadow:0 14px 40px #55395e0b;margin:17px 0}
+h2{font-size:23px;line-height:1.3;margin:8px 0 10px;letter-spacing:-.4px}h3{margin:0 0 8px}.muted{color:var(--muted)}.small{font-size:13px}.rule{height:1px;background:var(--line);margin:22px 0}
+button{font:inherit;cursor:pointer;border:0;border-radius:13px;padding:13px 19px;font-weight:750;transition:transform .15s,filter .15s}button:hover{filter:brightness(.98);transform:translateY(-1px)}button:focus-visible{outline:3px solid #ad9bea;outline-offset:2px}.primary{background:linear-gradient(110deg,var(--pink),var(--lav));color:white}.secondary{background:#f1ebf4;color:#5f5369}.btnrow{display:flex;gap:10px;justify-content:space-between;margin:22px 0}.btnrow button{min-width:120px}.full{width:100%}
+.note{border-radius:14px;background:#fbf7ff;border:1px solid #eee6fa;padding:14px 16px;font-size:13px;color:#6e617d}
+#quiz{display:none}.progress-top{display:flex;justify-content:space-between;gap:10px;font-size:12px;font-weight:750;color:#7d7186;margin-bottom:9px}.progress{height:8px;background:#eee7f1;border-radius:9px;overflow:hidden}.progress div{height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--lav));transition:width .2s}
+.section-kicker{font-size:11px;font-weight:850;letter-spacing:1.4px;color:#bd4f8c}
+.question{padding:23px 0;border-bottom:1px solid var(--line)}.question:last-child{border-bottom:0}.qhead{display:flex;gap:13px;align-items:flex-start}.qnum{flex:0 0 32px;height:32px;border-radius:11px;background:#fff0f7;color:#b34783;display:grid;place-items:center;font-weight:800;font-size:12px}.qtitle{font-size:17px;font-weight:800;line-height:1.4}.qhint{font-size:12px;color:var(--muted);margin:6px 0 13px 45px}
+.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-left:45px}.choice{position:relative}.choice input{position:absolute;opacity:0;pointer-events:none}.choice label{display:flex;gap:10px;align-items:flex-start;padding:12px;border:1px solid var(--line);border-radius:13px;min-height:58px;cursor:pointer;font-size:13px;line-height:1.45;background:#fff;transition:.15s}.choice label:hover{border-color:#e2a6c7;background:#fffafd}.choice input:checked+label{border-color:var(--pink);background:#fff0f7;box-shadow:inset 0 0 0 1px #e9a4c7}.choice input:focus-visible+label{outline:3px solid #b7a2ef}.choice .sym{font-size:19px;line-height:1.1}.err{color:#bd3476;font-size:13px;min-height:20px}
+#results{display:none}.result-hero{text-align:center;padding:15px 0 23px}.result-hero .flower{font-size:42px}.result-hero h1{font-size:clamp(28px,5vw,42px)}
+.profile{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}.profilebox{background:#fff9fc;border:1px solid var(--line);padding:18px;border-radius:17px}.profilebox p{font-size:14px;margin:6px 0;color:var(--muted)}
+.barline{margin:14px 0}.barlabel{display:flex;justify-content:space-between;gap:12px;font-size:13px;font-weight:750}.bartrack{height:7px;background:#eee7f1;border-radius:9px;overflow:hidden;margin-top:6px}.barfill{height:100%;background:linear-gradient(90deg,var(--pink),var(--lav));border-radius:9px}
+.career{border:1px solid var(--line);border-radius:17px;padding:18px;margin:12px 0}.career-top{display:flex;gap:12px;align-items:flex-start}.career-icon{width:45px;height:45px;border-radius:14px;background:#fff0f7;display:grid;place-items:center;font-size:23px;flex-shrink:0}.career h3{font-size:17px}.career p{font-size:13px;color:var(--muted);margin:7px 0}.label{display:inline-block;border-radius:99px;background:#f2edfc;color:#6e55a1;padding:4px 9px;font-size:11px;font-weight:800;margin-bottom:7px}
+.career-details{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.detail{background:#fbf8fc;border-radius:12px;padding:12px;font-size:12px;color:#6d6376}.detail strong{display:block;color:var(--ink);font-size:12px;margin-bottom:4px}
+.pills{display:flex;flex-wrap:wrap;gap:7px}.pill{background:#f5effb;border-radius:99px;padding:6px 10px;font-size:12px;color:#6c558e}
+.nextsteps{counter-reset:step;list-style:none;padding:0}.nextsteps li{counter-increment:step;display:flex;gap:12px;margin:12px 0;font-size:14px}.nextsteps li:before{content:counter(step);display:grid;place-items:center;flex:0 0 28px;height:28px;border-radius:10px;background:#fce7f2;color:#a93e78;font-weight:800}
+.hidden{display:none!important}footer{text-align:center;color:#94889a;font-size:12px;padding:25px;line-height:1.8}
+@media(max-width:640px){header{padding:14px 17px}.navnote{max-width:135px;text-align:right}.hero{padding-top:27px}.hero-grid{grid-template-columns:1fr;max-width:360px}.mini{text-align:left}.options{grid-template-columns:1fr;margin-left:0}.qhint{margin-left:0}.profile{grid-template-columns:1fr}.career-details{grid-template-columns:1fr}.btnrow button{min-width:0;flex:1}}
+@media print{header,.hero,#quiz,.btnrow,footer{display:none!important}body{background:white}main{max-width:100%;padding:0}.panel{box-shadow:none;break-inside:avoid}.career{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header><div class="logo">✿ Future <span>Me</span></div><div class="navnote">Өөрийгөө таних нь ирээдүйгээ сонгох эхлэл</div></header>
+<main>
+<section id="intro">
+ <div class="hero">
+  <span class="eyebrow">CAREER EXPLORATION · ӨӨРИЙГӨӨ ТАНЬ</span>
+  <h1>Чамд яг ямар<br>ирээдүй тохирох вэ?</h1>
+  <p>Энэ бол ганцхан мэргэжил оноодог тест биш. Чи юу хийх дуртай, юунд сонирхолтой, ямар чадвараа хөгжүүлэхийг хүсдэг, ямар амьдралын хэв маягийг эрхэмлэдгээ судлаад хэд хэдэн боломжит чиглэлээ нээх аялал юм.</p>
+  <div class="hero-grid">
+   <div class="mini"><strong>🌱 20 асуулт</strong>Сонирхол, чадвар, үнэт зүйл</div>
+   <div class="mini"><strong>🧭 Олон хувилбар</strong>Нарийвчилсан мэргэжлийн санаанууд</div>
+   <div class="mini"><strong>💡 Яагаад гэдгийг нь</strong>Хариулттай чинь холбосон тайлбар</div>
+  </div>
+  <button class="primary" onclick="begin()">Өөрийгөө таньж эхлэх →</button>
+ </div>
+ <div class="panel">
+  <h2>Эхлэхээсээ өмнө</h2>
+  <p class="muted">Асуултад “зөв” эсвэл “буруу” хариулт байхгүй. Бусдад гоё харагдах хариултыг биш, өөрт чинь үнэхээр ойр санагддаг сонголтыг тэмдэглээрэй. Чаддаг зүйл, хийх дуртай зүйл хоёр одоогоор өөр байж болно — аль аль нь чухал.</p>
+  <div class="rule"></div>
+  <h3>Тест хэрхэн ажиллах вэ?</h3>
+  <ul class="muted">
+   <li>20 асуултад өөрийнхөөрөө хариулна. Зарим асуултад 2 хүртэл сонголт хийж болно.</li>
+   <li>Үр дүн нь чиний хариултаас гаргасан чиг баримжаа болохоос эцсийн дүгнэлт биш.</li>
+   <li>Хариултууд сервер рүү илгээгдэхгүй, энэ төхөөрөмж дээр боловсруулагдана.</li>
+  </ul>
+  <div class="note">Нууцлал: энэ хувилбар нэр, утас, имэйл асуухгүй. Бүх хүүхдийн хариултыг багш эсвэл тест зохиогч руу автоматаар илгээхгүй.</div>
+ </div>
+</section>
+
+<form id="quiz" onsubmit="return false">
+ <div class="panel">
+  <div class="progress-top"><span id="progressLabel">1 / 5-р хэсэг</span><span id="progressPercent">20%</span></div>
+  <div class="progress"><div id="progressBar"></div></div>
+  <div id="questionArea"></div>
+  <div class="err" id="error"></div>
+  <div class="btnrow"><button type="button" class="secondary" id="backBtn" onclick="previous()">← Буцах</button><button type="button" class="primary" id="nextBtn" onclick="next()">Дараах →</button></div>
+ </div>
+</form>
+
+<section id="results">
+ <div class="panel">
+  <div class="result-hero"><div class="flower">🌷</div><span class="eyebrow">ЧИНИЙ ХУВИЙН ЗУРАГЛАЛ</span><h1>Өөрийн боломжуудаа нээ</h1><p class="muted">Доорх үр дүн нь чиний сонгосон хариултуудын давхцал дээр үндэслэнэ.</p></div>
+  <div class="profile">
+   <div class="profilebox"><h3>Чиний ажлын хэв маяг</h3><p id="profileStyle"></p><div id="stylePills" class="pills"></div></div>
+   <div class="profilebox"><h3>Чамд чухал зүйлс</h3><p id="profileValues"></p><div id="valuePills" class="pills"></div></div>
+  </div>
+  <div class="rule"></div>
+  <h2>Сонирхлын чинь зураглал</h2><p class="muted small">Эдгээр нь харьцангуй сонирхлын дохио болохоос чадварын шалгалтын оноо биш.</p>
+  <div id="interestBars"></div>
+  <div class="rule"></div>
+  <h2>Чамд судалж үзэхийг санал болгох мэргэжлүүд</h2>
+  <p class="muted small">Эхний 3 чиглэлийг хамгийн өндөр давхцалтайгаар харуулна. Дараагийн хувилбаруудыг ч бас шалгаарай.</p>
+  <div id="careerList"></div>
+  <div class="rule"></div>
+  <h2>Одоо яаж шалгаж үзэх вэ?</h2>
+  <ol class="nextsteps">
+   <li>Дээрх мэргэжлүүдээс хамгийн их сонирхол татсан 2-ыг тэмдэглэ.</li>
+   <li>Тэр ажлын өдөр тутмын бодит ажил, шаардлагатай хичээл, суралцах замыг судал.</li>
+   <li>Жижиг туршилт хий: код бичих, постер бүтээх, төсөв гаргах, ярилцлага хийх, сайн дурын ажилд оролцох гэх мэт.</li>
+   <li>Туршсаны дараа “надад таалагдсан уу, би дахин хийхийг хүсэж байна уу?” гэж өөрөөсөө асуу.</li>
+  </ol>
+  <div class="note"><strong>Санах зүйл:</strong> Тохирох мэргэжил гэдэг нь тест чиний өмнөөс шийдвэр гаргана гэсэн үг биш. Харин өөрийнхөө тухай илүү сайн асуулт асууж, бодит туршлагаар сонголтоо шалгах эхлэл юм.</div>
+  <div class="btnrow"><button type="button" class="secondary" onclick="restart()">↻ Дахин бөглөх</button><button type="button" class="primary" onclick="window.print()">Үр дүнг хэвлэх / PDF</button></div>
+ </div>
+</section>
+</main>
+<footer>Future Me · Өөрийгөө таних аялал 💗<br>Энэ тест нь боловсролын зорилготой, албан ёсны сэтгэлзүйн үнэлгээ биш.</footer>
+
+<script>
+const domains = {
+ tech:{name:"Технологи ба өгөгдөл",icon:"💻",desc:"Логик сэтгэлгээ, систем, мэдээлэл эсвэл дижитал хэрэгсэлтэй ажиллах сонирхол."},
+ people:{name:"Хүмүүс ба нийгэм",icon:"🤝",desc:"Хүмүүсийг ойлгох, дэмжих, харилцаа болон нийгмийн асуудлыг сонирхох."},
+ creative:{name:"Бүтээлч байдал ба дизайн",icon:"🎨",desc:"Шинэ санаа, дүрслэл, өгүүлэмж, хэлбэр эсвэл хэрэглэгчийн туршлага бүтээх."},
+ business:{name:"Бизнес ба манлайлал",icon:"📈",desc:"Санааг ажил хэрэг болгох, зохион байгуулах, нөлөөлөх, үнэ цэн бүтээх."},
+ science:{name:"Шинжлэх ухаан ба судалгаа",icon:"🔬",desc:"Яагаад, хэрхэн гэдгийг судлах, нотолгоо цуглуулах, асуудлыг шинжлэх."},
+ practical:{name:"Инженерчлэл ба практик бүтээл",icon:"⚙️",desc:"Бодит зүйл бүтээх, засах, турших, үйл явцыг сайжруулах."},
+ care:{name:"Эрүүл мэнд ба халамж",icon:"🌿",desc:"Хүмүүсийн сайн сайхан байдал, эрүүл мэнд, амьдралын чанарт хувь нэмэр оруулах."},
+ language:{name:"Хэл ба дэлхийн харилцаа",icon:"🌍",desc:"Хэл, соёл, олон улсын орчин, мэдээлэл солилцохыг сонирхох."}
+};
+const qs=[
+ {section:"СОНИРХОЛ",title:"Чөлөөт цагаараа аль зүйлд цаг өнгөрөөхөд хамгийн дуртай вэ?",hint:"2 хүртэл сонголт.",max:2,opts:[
+ ["Компьютер дээр юм оролдох, код эсвэл апп судлах","💻",{tech:2}],
+ ["Зураг, бичлэг, дизайн эсвэл өөр зүйл бүтээх","🎨",{creative:2}],
+ ["Хүнтэй ярилцах, туслах, зөвлөгөө өгөх","🤝",{people:2,care:1}],
+ ["Жижиг бизнесийн санаа, мөнгө, борлуулалт бодох","📈",{business:2}],
+ ["Байгаль, шинжлэх ухаан, учир шалтгаан судлах","🔬",{science:2}],
+ ["Гараар юм хийх, угсрах, засах","🛠️",{practical:2}]
+ ]},
+ {section:"СОНИРХОЛ",title:"Ямар төрлийн асуудлыг шийдэх нь чамд хамгийн сонирхолтой вэ?",max:2,opts:[
+ ["Нэг зүйл яагаад ажиллахгүй байгааг олж, засах","🧩",{tech:1,practical:2}],
+ ["Хүнд хэцүү зүйлийг хүмүүст ойлгомжтой тайлбарлах","💬",{people:2,language:1}],
+ ["Бүтээгдэхүүн, дүр төрх эсвэл санааг илүү гоё болгох","✨",{creative:2,business:1}],
+ ["Нөөц, мөнгө, цагийг зөв хуваарилах","🧮",{business:2,tech:1}],
+ ["Өгөгдөл, туршилтаар үнэн зөв хариу олох","🔎",{science:2,tech:1}],
+ ["Хэн нэгний амьдралд бодит тус хүргэх","💗",{care:2,people:1}]
+ ]},
+ {section:"СОНИРХОЛ",title:"Сургууль дээр ямар даалгавар хийхэд цаг хурдан өнгөрдөг вэ?",max:2,opts:[
+ ["Математик, логик, мэдээлэл зүй","📊",{tech:2,science:1}],
+ ["Эсээ бичих, хэл сурах, илтгэл тавих","📝",{language:2,people:1}],
+ ["Зураг, танилцуулга, видео хийх","🖌️",{creative:2}],
+ ["Багийн ажил зохион байгуулах, санаачилга гаргах","🚀",{business:2,people:1}],
+ ["Туршилт хийх, мэдээлэл цуглуулах","🧪",{science:2}],
+ ["Бодит загвар, төхөөрөмж эсвэл гар урлал хийх","⚙️",{practical:2}]
+ ]},
+ {section:"СОНИРХОЛ",title:"Хэрэв нэг өдрийн турш ямар ч эрсдэлгүй туршиж үзэж болох бол алийг сонгох вэ?",max:2,opts:[
+ ["Вэбсайт эсвэл жижиг апп хийх","💻",{tech:2}],
+ ["Лого, хувцас, өрөө эсвэл постерын загвар гаргах","🎨",{creative:2}],
+ ["Эмнэлэг, лабораторийн ажилтай танилцах","🩺",{care:2,science:1}],
+ ["Брэндийн бүтээгдэхүүн гаргаж, хэрхэн борлуулахыг бодох","🛍️",{business:2,creative:1}],
+ ["Шүүх хурал, мэтгэлцээн эсвэл нийгмийн асуудал судлах","⚖️",{people:1,language:1,science:1}],
+ ["Робот, төхөөрөмж эсвэл бодит зүйл угсрах","🤖",{practical:2,tech:1}]
+ ]},
+ {section:"ЧАДВАР БА СУРАЛЦАХ АРГА",title:"Хүмүүс чамаас ихэвчлэн юунд тусламж хүсдэг вэ?",hint:"Өөрт үнэхээр тохирохыг сонго.",max:2,opts:[
+ ["Техникийн асуудал, компьютер, тооцоолол","💻",{tech:2}],
+ ["Санаа, зураг, бичвэр, танилцуулга","🎨",{creative:2,language:1}],
+ ["Сонсох, ойлгох, эвлэрүүлэх","🤝",{people:2,care:1}],
+ ["Зохион байгуулах, шийдвэр гаргах","📋",{business:2}],
+ ["Баримт шалгах, учир шалтгаан олох","🔍",{science:2,tech:1}],
+ ["Гараар хийх, юм засах, бодит ажил","🛠️",{practical:2}]
+ ]},
+ {section:"ЧАДВАР БА СУРАЛЦАХ АРГА",title:"Шинэ зүйл сурахдаа аль арга чамд илүү үр дүнтэй вэ?",max:2,opts:[
+ ["Алхам алхмаар логик дарааллаар сурах","🧠",{tech:1,science:1}],
+ ["Өөрөө туршиж, хийж үзэх","🧰",{practical:2,tech:1}],
+ ["Зураг, жишээ, дүрслэлээр ойлгох","🎨",{creative:2}],
+ ["Хүнтэй ярилцаж, хамтран сурах","🗣️",{people:2,language:1}],
+ ["Уншиж судлаад, баримтаар батлах","📚",{science:2,language:1}],
+ ["Зорилго тавьж, төлөвлөгөө гарган сурах","🎯",{business:2}]
+ ]},
+ {section:"ЧАДВАР БА СУРАЛЦАХ АРГА",title:"Аль чадвараа хөгжүүлбэл өөртөө хамгийн их итгэлтэй болох вэ?",max:2,opts:[
+ ["Программчлал, өгөгдөл, AI ашиглах","💻",{tech:2}],
+ ["Ярих, бичих, хэлэлцээр хийх","🎤",{language:2,people:1}],
+ ["Дизайн, зураг, бүтээлч илэрхийлэл","🖼️",{creative:2}],
+ ["Манлайлах, бизнес эхлүүлэх, санхүү ойлгох","📈",{business:2}],
+ ["Судалгаа, анализ, нотолгоонд тулгуурлах","🔬",{science:2}],
+ ["Хүнд туслах, эрүүл мэндийн мэдлэгтэй болох","🌿",{care:2}]
+ ]},
+ {section:"ЧАДВАР БА СУРАЛЦАХ АРГА",title:"Багийн ажилд чи ихэвчлэн ямар үүрэг авдаг вэ?",max:2,opts:[
+ ["Төлөвлөгөө, зохион байгуулалтыг гаргах","📋",{business:2}],
+ ["Шинэ санаа, дүр төрх, танилцуулга гаргах","💡",{creative:2}],
+ ["Мэдээлэл шалгаж, асуудлыг задлан бодох","🔎",{science:1,tech:1}],
+ ["Бүгдийг сонсож, ойлголцуулах","🤝",{people:2}],
+ ["Техникийн эсвэл практик хэсгийг хийх","🛠️",{practical:2,tech:1}],
+ ["Гадаад эх сурвалж хайж, хэлээр мэдээлэл боловсруулах","🌍",{language:2}]
+ ]},
+ {section:"АЗ ЖАРГАЛ БА УТГА УЧИР",title:"Өдрийн төгсгөлд юу хийсэн байвал чи “өнөөдөр үр дүнтэй байлаа” гэж мэдрэх вэ?",max:2,opts:[
+ ["Асуудлыг шийдэж, ажилладаг зүйл бүтээсэн","✅",{tech:1,practical:2}],
+ ["Хэн нэгэнд тусалж, сэтгэлд нь хүрсэн","💗",{care:2,people:1}],
+ ["Өөрийн санаагаар гоё зүйл бүтээсэн","🎨",{creative:2}],
+ ["Зорилгодоо хүрч, баг эсвэл төслийг урагшлуулсан","🚀",{business:2}],
+ ["Шинэ зүйл нээж, мэдлэгээ нэмсэн","🔬",{science:2}],
+ ["Шинэ хүн, соёл, газар эсвэл санаатай холбогдсон","🌏",{language:2,people:1}]
+ ]},
+ {section:"АЗ ЖАРГАЛ БА УТГА УЧИР",title:"Юу чамд хамгийн их урам зориг өгдөг вэ?",max:2,opts:[
+ ["Хэцүү зүйл ойлгож чадсан мөч","💡",{tech:1,science:1}],
+ ["Хүмүүс миний бүтээлийг ашиглаж, үнэлэх","✨",{creative:2,business:1}],
+ ["Хэн нэгний асуудлыг шийдэхэд туслах","🤝",{care:2,people:1}],
+ ["Өөрийн санаа бодит ажил болж, өсөх","📈",{business:2}],
+ ["Шинэ баримт нээх эсвэл асуултын хариуг олох","🔎",{science:2}],
+ ["Өөрөө бие дааж, шинэ орчинд ажиллах","🌍",{language:1,business:1,practical:1}]
+ ]},
+ {section:"АЗ ЖАРГАЛ БА УТГА УЧИР",title:"Аль асуудал чамд илүү үнэ цэнтэй санагддаг вэ?",max:2,opts:[
+ ["Технологийг хүмүүст хэрэгтэй, хүртээмжтэй болгох","💻",{tech:2,care:1}],
+ ["Хүмүүс эрүүл, аюулгүй амьдрахад туслах","🌿",{care:2}],
+ ["Шударга ёс, эрх, нийгмийн асуудал","⚖️",{people:2,language:1}],
+ ["Байгаль, шинжлэх ухаан, ирээдүйн нээлт","🌱",{science:2,practical:1}],
+ ["Хүмүүсийн өдөр тутмыг илүү гоё, хялбар болгох","🎨",{creative:1,business:1,tech:1}],
+ ["Ажлын байр, компани, шинэ боломж бий болгох","🏢",{business:2}]
+ ]},
+ {section:"АЗ ЖАРГАЛ БА УТГА УЧИР",title:"Амжилтыг чи юугаар илүү хэмжих вэ?",max:2,opts:[
+ ["Мэргэжлээрээ чадварлаг болж, төвөгтэй зүйл хийж чаддаг болох","🏅",{tech:1,science:1,practical:1}],
+ ["Бусдад бодит эерэг нөлөө үзүүлэх","💗",{care:1,people:2}],
+ ["Өөрийн бүтээл, санаагаа олон хүнд хүргэх","🎨",{creative:2,language:1}],
+ ["Өөрийн бизнес эсвэл багийг өсгөх","📈",{business:2}],
+ ["Дэлхий, нийгмийн талаар шинэ зүйл ойлгох","🌍",{science:1,language:1}],
+ ["Бие даасан, уян хатан амьдралтай болох","🕊️",{business:1,creative:1,language:1}]
+ ]},
+ {section:"АЖЛЫН ОРЧИН",title:"Ямар ажлын орчинд өөрийгөө илүү тухтай төсөөлж байна вэ?",max:2,opts:[
+ ["Компьютер, дижитал хэрэгсэлтэй төвлөрч ажиллах","💻",{tech:2}],
+ ["Студи, бүтээлч баг, зураг авалтын орчин","🎨",{creative:2}],
+ ["Хүмүүс, үйлчлүүлэгч эсвэл олон нийттэй уулзах","🤝",{people:2,language:1}],
+ ["Компани, төсөл, баг удирдах орчин","🏢",{business:2}],
+ ["Лаборатори, судалгааны орчин","🔬",{science:2}],
+ ["Эмнэлэг, сургууль эсвэл тусламж үйлчилгээний орчин","🌿",{care:2,people:1}]
+ ]},
+ {section:"АЖЛЫН ОРЧИН",title:"Чи ихэвчлэн ямар хэмнэлээр ажиллахыг хүсдэг вэ?",max:2,opts:[
+ ["Удаан төвлөрч, нарийн асуудал шийдэх","🧩",{tech:1,science:1}],
+ ["Олон өөр төсөл, шинэ санаа ээлжлэн хийх","🎨",{creative:1,business:1}],
+ ["Өдөр бүр хүмүүстэй харилцаж ажиллах","🗣️",{people:2,language:1}],
+ ["Зорилго, үр дүнтэй, шийдвэр гаргах боломжтой байх","🎯",{business:2}],
+ ["Туршилт, бодит ажил, гараар хийж сурах","🛠️",{practical:2}],
+ ["Олон улсын эсвэл өөр өөр соёлтой багт ажиллах","🌍",{language:2}]
+ ]},
+ {section:"АЖЛЫН ОРЧИН",title:"Ямар ажлын бэрхшээлийг тэвчиж, даван туулахад бэлэн санагддаг вэ?",max:2,opts:[
+ ["Удаан хугацаанд бодож байж хариу олох","🧠",{tech:1,science:2}],
+ ["Бүтээлээ дахин дахин засаж сайжруулах","🖌️",{creative:2,practical:1}],
+ ["Хүнд сэдвээр ярилцаж, бусдын хэрэгцээг сонсох","🤝",{people:2,care:1}],
+ ["Тодорхойгүй нөхцөлд шийдвэр гаргаж, эрсдэл тооцох","📈",{business:2}],
+ ["Нарийн дүрэм, стандарт, хариуцлагатай ажиллах","⚖️",{science:1,care:1,practical:1}],
+ ["Шинэ хэл, соёл, орчинд дасах","🌏",{language:2}]
+ ]},
+ {section:"ИРЭЭДҮЙН ЗОРИЛГО",title:"Ирээдүйн ажлаасаа хамгийн их юу хүсдэг вэ?",max:2,opts:[
+ ["Техникийн өндөр чадвар, олон асуудал шийдэх боломж","💻",{tech:2}],
+ ["Бүтээлч эрх чөлөө, өөрийн хэв маяг","🎨",{creative:2}],
+ ["Хүмүүсийн амьдралд утга учиртай тус хүргэх","💗",{care:1,people:2}],
+ ["Өндөр өсөлт, бизнес хөгжүүлэх боломж","📈",{business:2}],
+ ["Судалгаа, мэдлэг, шинэ нээлт","🔬",{science:2}],
+ ["Олон улс, хэл, соёлын боломж","🌍",{language:2}]
+ ]},
+ {section:"ИРЭЭДҮЙН ЗОРИЛГО",title:"Аль нь чамд илүү чухал вэ?",max:2,opts:[
+ ["Тогтвортой байдал, тодорхой замнал","🧭",{science:1,care:1,practical:1}],
+ ["Уян хатан байдал, өөрийн цагийн хуваарь","🕊️",{creative:1,business:1,tech:1}],
+ ["Санхүүгийн бие даасан байдал","💰",{business:2,tech:1}],
+ ["Нийгэмд хэрэгтэй зүйл хийх","🌱",{care:1,people:1,science:1}],
+ ["Олон улсад сурах, ажиллах боломж","🌍",{language:2,tech:1}],
+ ["Өөрийн бизнес, брэнд эсвэл байгууллага байгуулах","🏢",{business:2,creative:1}]
+ ]},
+ {section:"ИРЭЭДҮЙН ЗОРИЛГО",title:"Аль чадвар чиний ирээдүйд хамгийн хэрэгтэй байхыг хүсэж байна вэ?",max:2,opts:[
+ ["Программчлал, AI, өгөгдөл","💻",{tech:2}],
+ ["Санхүү, маркетинг, удирдлага","📈",{business:2}],
+ ["Дизайн, контент, бүтээлч илэрхийлэл","🎨",{creative:2}],
+ ["Харилцаа, хэл, хэлэлцээр","🌍",{language:1,people:1}],
+ ["Эрүүл мэнд, хүний хөгжил, сэтгэл судлал","🌿",{care:2,people:1}],
+ ["Судалгаа, инженерчлэл, бодит бүтээл","🔬",{science:1,practical:2}]
+ ]},
+ {section:"ӨӨРИЙГӨӨ ОЙЛГОХ",title:"Чи юуг хийж үзээгүй ч цаашдаа туршиж үзмээр байна вэ?",max:2,opts:[
+ ["Вэбсайт, апп эсвэл AI төсөл хийх","💻",{tech:2}],
+ ["Загварын цуглуулга, анимейшн, интерьер эсвэл график бүтээл хийх","🎨",{creative:2}],
+ ["Хүмүүст туслах төсөл, эрүүл мэнд эсвэл боловсролын ажил","💗",{care:1,people:2}],
+ ["Онлайн дэлгүүр, брэнд эсвэл жижиг бизнес эхлүүлэх","🛍️",{business:2}],
+ ["Шинжлэх ухааны судалгаа эсвэл инженерийн туршилт хийх","🧪",{science:1,practical:2}],
+ ["Гадаад хэл, олон улсын төсөл, соёлын солилцоо","🌍",{language:2}]
+ ]},
+ {section:"ӨӨРИЙГӨӨ ОЙЛГОХ",title:"Хэрэв сонголт хийхэд эргэлзэж байвал юуг эхэлж шалгах вэ?",max:2,opts:[
+ ["Өдөр тутмын ажил нь надад сонирхолтой юу?","🔍",{tech:1,creative:1,science:1}],
+ ["Би шаардлагатай чадваруудаа сурах хүсэлтэй юу?","📚",{science:1,practical:1}],
+ ["Энэ ажил ямар хүмүүст, юунд хэрэгтэй вэ?","💗",{care:1,people:1}],
+ ["Амьдралын хэв маяг, орлого, өсөх боломж нь ямар вэ?","📈",{business:1}],
+ ["Жижиг төсөл хийж үзэхэд надад таалагдах уу?","🧰",{practical:1,creative:1,tech:1}],
+ ["Энэ чиглэлээр өөр улс, өөр салбарт ажиллаж болох уу?","🌍",{language:1,business:1}]
+ ]}
+];
+const careers=[
+ {name:"Программ хангамжийн инженер",icon:"💻",tags:["tech","practical"],about:"Вэбсайт, апп, систем бүтээж, ажиллахгүй байгаа хэсгийг олж засна.",why:["Логик асуудал шийдэх","Дижитал зүйл бүтээх"],skills:"Математикийн суурь, программчлал, англи хэл, багийн ажил.",try:"Энгийн вэб хуудас эсвэл жижиг апп бүтээж үз."},
+ {name:"AI / машин сургалтын инженер",icon:"🤖",tags:["tech","science"],about:"Өгөгдөл болон алгоритмаар ухаалаг систем хөгжүүлнэ.",why:["Технологи ба судалгааг хослуулах","Нарийн асуудал шийдэх"],skills:"Математик, статистик, Python, өгөгдөл, англи хэл.",try:"Python-аар өгөгдөл ангилах жижиг төсөл хий."},
+ {name:"Өгөгдлийн шинжээч",icon:"📊",tags:["tech","science","business"],about:"Өгөгдлийг судалж, бизнес эсвэл байгууллагад шийдвэр гаргахад тусална.",why:["Баримтад тулгуурлах","Тоо ба бодит асуудлыг холбох"],skills:"Математик, статистик, Excel, SQL, дүрслэл.",try:"Сонирхдог сэдвийнхээ өгөгдлөөр график гарга."},
+ {name:"Кибер аюулгүй байдлын мэргэжилтэн",icon:"🛡️",tags:["tech","science"],about:"Систем, сүлжээ, мэдээллийг хамгаалж, эрсдэлийг илрүүлнэ.",why:["Асуудлын учрыг олох","Системтэй сэтгэх"],skills:"Сүлжээ, үйлдлийн систем, программчлал, ёс зүй.",try:"Кибер аюулгүй байдлын анхан шатны хууль ёсны сургалт үз."},
+ {name:"UX/UI дизайнер",icon:"📱",tags:["creative","tech","people"],about:"Апп, вэбсайтыг хэрэглэхэд ойлгомжтой, хүртээмжтэй, эвтэйхэн болгоно.",why:["Дизайн ба технологийг хослуулах","Хэрэглэгчийг ойлгох"],skills:"Дизайны үндэс, хэрэглэгчийн судалгаа, Figma, тайлбарлах чадвар.",try:"Өөрийн хэрэглэдэг аппын нэг дэлгэцийг дахин загварчил."},
+ {name:"График дизайнер",icon:"🖼️",tags:["creative"],about:"Лого, постер, сав баглаа боодол, брэндийн дүр төрх бүтээнэ.",why:["Дүрслэл, өнгө, санаа бүтээх","Санааг нүдэнд харагдах хэлбэрт оруулах"],skills:"Композици, типографик, өнгө, дизайны программ.",try:"Нэг зохиомол брэндэд лого ба постер хий."},
+ {name:"Анимейшн ба хөдөлгөөнт графикийн уран бүтээлч",icon:"🎬",tags:["creative","tech"],about:"Хөдөлгөөнт дүрс, визуал эффект, тайлбар видео болон дүрийн хөдөлгөөн бүтээнэ.",why:["Дүрслэл ба технологи","Өгүүлэмжээр санаа илэрхийлэх"],skills:"Зураглал, хөдөлгөөний үндэс, видео/3D программ.",try:"10 секундийн энгийн хөдөлгөөнт бүтээл хий."},
+ {name:"Интерьер дизайнер",icon:"🛋️",tags:["creative","practical"],about:"Өрөө, дэлгүүр, оффис зэрэг орон зайн зохион байгуулалт, өнгө, гэрэлтүүлгийг төлөвлөнө.",why:["Орон зайг сайжруулах","Гоо зүй ба бодит хэрэгцээг хослуулах"],skills:"Зураглал, хэмжээ тооцох, материал, 3D загвар.",try:"Өөрийн өрөөний зохион байгуулалтын хоёр хувилбар зур."},
+ {name:"Хувцас загвар зохион бүтээгч",icon:"🧵",tags:["creative","practical","business"],about:"Хувцасны санаа, загвар, материал, цуглуулга болон үйлдвэрлэлийн шийдэл гаргана.",why:["Өөрийн хэв маягийг бүтээх","Дизайныг бодит бүтээгдэхүүн болгох"],skills:"Зураг, материал судлал, оёдлын суурь, тренд судалгаа.",try:"Сэдэвтэй мини цуглуулгын 3 загварын самбар хий."},
+ {name:"Дижитал маркетер",icon:"📣",tags:["business","creative","tech"],about:"Онлайн сувгаар хэрэглэгчдэд хүрч, агуулга, сурталчилгаа, үр дүнг хэмжинэ.",why:["Бүтээлч санааг зорилготой холбох","Үр дүнг тоогоор шалгах"],skills:"Бичих, контент, аналитик, хэрэглэгчийн ойлголт.",try:"Жижиг брэндийн 7 хоногийн контент төлөвлөгөө гарга."},
+ {name:"Бизнес эрхлэгч / үүсгэн байгуулагч",icon:"🚀",tags:["business","creative","people"],about:"Асуудал олж, бүтээгдэхүүн эсвэл үйлчилгээ бүтээн, хэрэглэгч, санхүү, багийг зохион байгуулна.",why:["Санааг бодит ажил болгох","Шийдвэр гаргаж, баг удирдах"],skills:"Санхүү, борлуулалт, хэрэглэгчийн судалгаа, харилцаа.",try:"Нэг асуудал сонгож, жижиг бизнесийн санааг 5 хүнд шалгуул."},
+ {name:"Санхүүгийн шинжээч",icon:"💰",tags:["business","tech","science"],about:"Зардал, орлого, эрсдэл, хөрөнгө оруулалтын мэдээллийг шинжилнэ.",why:["Тоо баримтаар шийдвэр гаргах","Нөөцийг ухаалгаар ашиглах"],skills:"Математик, Excel, нягтлан бодох бүртгэл, эдийн засаг.",try:"Жижиг төслийн төсөв, орлого-зардлын хүснэгт гарга."},
+ {name:"Бүтээгдэхүүний менежер",icon:"🧭",tags:["business","tech","people","creative"],about:"Хэрэглэгчийн хэрэгцээ, бизнесийн зорилго, хөгжүүлэлтийн багийг холбож бүтээгдэхүүний чиглэлийг тодорхойлно.",why:["Олон салбарын ажлыг холбох","Асуудал ба шийдлийг зохион байгуулах"],skills:"Харилцаа, судалгаа, төлөвлөлт, аналитик, технологийн суурь.",try:"Нэг аппын хэрэглэгчийн асуудлыг тодорхойлж, сайжруулалтын төлөвлөгөө бич."},
+ {name:"Хуульч",icon:"⚖️",tags:["people","language","science"],about:"Хууль, баримт, тайлбарыг судалж, хүмүүс болон байгууллагад эрх зүйн асуудлаар тусална.",why:["Шударга ёс, нийгмийн асуудал","Баримт ба үндэслэлтэй тайлбар"],skills:"Унших, бичих, логик, судалгаа, илтгэх чадвар.",try:"Нийгмийн нэг асуудлыг хоёр талаас нь судалж, үндэслэл бич."},
+ {name:"Олон улсын харилцааны мэргэжилтэн",icon:"🌍",tags:["language","people","business"],about:"Улс орон, байгууллага, соёл хоорондын хамтын ажиллагаа, төсөл, харилцаанд оролцоно.",why:["Хэл ба олон соёл","Нийгэм, дэлхийн асуудал"],skills:"Гадаад хэл, бичих, судалгаа, хэлэлцээр, түүх/улс төрийн мэдлэг.",try:"Нэг улсын асуудлаар хоёр өөр эх сурвалж уншиж, товч дүгнэлт хий."},
+ {name:"Сэтгэл судлаач",icon:"🧠",tags:["people","care","science"],about:"Хүний сэтгэлгээ, сэтгэл хөдлөл, зан үйлийг судалж, мэргэжлийн хүрээнд дэмжлэг үзүүлнэ.",why:["Хүнийг ойлгох","Сонсох, судлах, туслах"],skills:"Сонсох, судалгааны арга, ёс зүй, сэтгэл судлалын онол.",try:"Сэтгэл судлалын шинжлэх ухаанч эх сурвалжаас нэг сэдэв судал."},
+ {name:"Эмч",icon:"🩺",tags:["care","science","people"],about:"Өвчнөөс урьдчилан сэргийлэх, оношлох, эмчлэхэд шинжлэх ухаан болон клиникийн мэдлэг ашиглана.",why:["Хүний эрүүл мэндэд хувь нэмэр оруулах","Шинжлэх ухаан ба хариуцлага"],skills:"Биологи, хими, харилцаа, нарийн ажиглалт, урт хугацааны суралцах чадвар.",try:"Анагаахын мэргэжлийн өдөр тутмын бодит ажил, сургалтын хугацааг судал."},
+ {name:"Биомедицин / лабораторийн судлаач",icon:"🧬",tags:["science","care"],about:"Биологийн дээж, туршилт, лабораторийн арга ашиглан эрүүл мэндийн талаарх мэдлэгийг нэмэгдүүлнэ.",why:["Нарийн судалгаа","Шинжлэх ухааныг эрүүл мэндтэй холбох"],skills:"Биологи, хими, статистик, нарийн ажиллагаа.",try:"Сургуулийн аюулгүй шинжлэх ухааны төсөлд оролц."},
+ {name:"Инженер",icon:"⚙️",tags:["practical","science","tech"],about:"Төхөөрөмж, барилга, систем, үйлдвэрлэлийн асуудлыг тооцоо болон туршилтаар шийднэ.",why:["Бодит зүйл бүтээх","Техникийн асуудлыг шийдэх"],skills:"Математик, физик, зураг төсөл, туршилт.",try:"Энгийн загвар бүтээж, ямар зарчмаар ажиллаж байгааг тайлбарла."},
+ {name:"Багш / сургалтын дизайнер",icon:"📚",tags:["people","creative","language"],about:"Мэдлэгийг ойлгомжтой хүргэх, хичээл болон сургалтын туршлагыг зохион бүтээнэ.",why:["Бусдад сурахад нь туслах","Мэдээллийг ойлгомжтой болгох"],skills:"Харилцаа, тайлбарлах, төлөвлөх, тухайн хичээлийн мэдлэг.",try:"Найздаа нэг сэдвийг 5 минутын мини хичээлээр зааж үз."},
+ {name:"Байгаль орчны мэргэжилтэн",icon:"🌱",tags:["science","practical","care"],about:"Байгаль орчны асуудлыг судалж, хамгаалал, тогтвортой хэрэглээний шийдэл боловсруулна.",why:["Шинжлэх ухаан ба бодит нөлөө","Ирээдүйд хэрэгтэй асуудал"],skills:"Биологи, газарзүй, өгөгдөл, талбайн судалгаа.",try:"Орон нутгийн нэг байгаль орчны асуудлыг ажиглаж, шийдлийн санал гарга."},
+ {name:"Гоо сайхны мэргэжилтэн / салон бизнес",icon:"💅",tags:["creative","business","people","practical"],about:"Гоо сайхны үйлчилгээ, үйлчлүүлэгчийн туршлага, үйлчилгээний чанар эсвэл өөрийн брэндийг хөгжүүлж болно.",why:["Гоо зүй ба гарын ур чадвар","Хүмүүст үйлчилгээ үзүүлэх эсвэл бизнес бүтээх"],skills:"Ариун цэвэр, дадлага, харилцаа, үнэ тогтоолт, бизнесийн суурь.",try:"Үйлчилгээний санаа, зардал, хэрэглэгчийн хэрэгцээний жижиг судалгаа хий."},
+ {name:"Нягтлан бодогч",icon:"🧾",tags:["business","tech","science"],about:"Байгууллагын санхүүгийн гүйлгээ, тайлан, төсөв, дүрэм журмыг хянаж бүртгэнэ.",why:["Нарийвчлал ба бүтэцтэй ажил","Мөнгөний урсгалыг ойлгох"],skills:"Математик, нягт нямбай байдал, Excel, санхүүгийн дүрэм.",try:"Зохиомол жижиг дэлгүүрийн орлого, зарлагыг хүснэгтэд бүртгэ."},
+ {name:"Сэтгүүлч / контент бүтээгч",icon:"🎙️",tags:["language","creative","people"],about:"Мэдээлэл судалж, шалгаж, нийтлэл, видео, ярилцлага зэрэг хэлбэрээр хүмүүст хүргэнэ.",why:["Санааг түүх болгон хүргэх","Хүмүүс ба үйл явдлыг судлах"],skills:"Бичих, ярилцлага, баримт шалгах, зураг/видео.",try:"Сургуулийнхаа нэг сэдвээр баримттай богино нийтлэл бэлд."}
+];
+
+let page=0, answers={};
+function begin(){document.getElementById('intro').classList.add('hidden');document.getElementById('quiz').style.display='block';page=0;renderPage();window.scrollTo({top:0,behavior:'smooth'});}
+function renderPage(){
+ const start=page*4,end=Math.min(start+4,qs.length),area=document.getElementById('questionArea');
+ document.getElementById('progressLabel').textContent=`${page+1} / ${Math.ceil(qs.length/4)}-р хэсэг`;
+ document.getElementById('progressPercent').textContent=`${Math.round(end/qs.length*100)}%`;
+ document.getElementById('progressBar').style.width=`${end/qs.length*100}%`;
+ document.getElementById('backBtn').style.visibility=page===0?'hidden':'visible';
+ document.getElementById('nextBtn').textContent=page===Math.ceil(qs.length/4)-1?'Үр дүнгээ харах ✨':'Дараах →';
+ area.innerHTML='';
+ for(let i=start;i<end;i++){
+  const q=qs[i], wrap=document.createElement('div');wrap.className='question';
+  const head=document.createElement('div');head.className='qhead';
+  head.innerHTML=`<div class="qnum">${String(i+1).padStart(2,'0')}</div><div><div class="section-kicker">${q.section}</div><div class="qtitle">${q.title}</div></div>`;
+  wrap.appendChild(head);
+  if(q.hint){const h=document.createElement('div');h.className='qhint';h.textContent=q.hint;wrap.appendChild(h);}
+  const opts=document.createElement('div');opts.className='options';
+  q.opts.forEach((o,j)=>{
+   const id=`q${i}_${j}`, div=document.createElement('div');div.className='choice';
+   div.innerHTML=`<input type="checkbox" id="${id}" name="q${i}" value="${j}"><label for="${id}"><span class="sym">${o[1]}</span><span>${o[0]}</span></label>`;
+   const input=div.querySelector('input');input.checked=(answers[i]||[]).includes(j);
+   input.addEventListener('change',()=>{
+    let selected=[...opts.querySelectorAll('input:checked')].map(x=>Number(x.value));
+    if(selected.length>q.max){input.checked=false;document.getElementById('error').textContent=`Энэ асуултад ${q.max} хүртэл сонголт хийнэ үү.`;return;}
+    answers[i]=selected;document.getElementById('error').textContent='';
+   });
+   opts.appendChild(div);
+  });
+  wrap.appendChild(opts);area.appendChild(wrap);
+ }
+ document.getElementById('error').textContent='';
+}
+function next(){
+ const start=page*4,end=Math.min(start+4,qs.length);
+ for(let i=start;i<end;i++){if(!(answers[i]||[]).length){document.getElementById('error').textContent=`${i+1}-р асуултад дор хаяж нэг хариулт сонгоорой. Бүх асуулт заавал хариулах шаардлагатай.`;return;}}
+ if(page<Math.ceil(qs.length/4)-1){page++;renderPage();window.scrollTo({top:0,behavior:'smooth'});}else showResults();
+}
+function previous(){if(page>0){page--;renderPage();window.scrollTo({top:0,behavior:'smooth'});}}
+function showResults(){
+ const score=Object.fromEntries(Object.keys(domains).map(k=>[k,0]));
+ const evidence=Object.fromEntries(Object.keys(domains).map(k=>[k,[]]));
+ const count=Object.fromEntries(Object.keys(domains).map(k=>[k,0]));
+ qs.forEach((q,i)=>(answers[i]||[]).forEach(j=>{
+  const opt=q.opts[j];Object.entries(opt[2]).forEach(([tag,val])=>{score[tag]+=val;count[tag]++;evidence[tag].push(q.title);});
+ }));
+ const max=Math.max(1,...Object.values(score));
+ const ranked=Object.entries(score).sort((a,b)=>b[1]-a[1]);
+ document.getElementById('profileStyle').textContent=`Чиний хариултад ${domains[ranked[0][0]].name.toLowerCase()} чиглэл илүү тод харагдаж байна${ranked[1]&&score[ranked[1][0]]>0?`, мөн ${domains[ranked[1][0]].name.toLowerCase()}-тай давхцаж байна`:''}. Энэ нь зөвхөн нэг төрлийн ажилд хязгаарлагдана гэсэн үг биш.`;
+ document.getElementById('stylePills').innerHTML=ranked.slice(0,3).map(([k])=>`<span class="pill">${domains[k].icon} ${domains[k].name}</span>`).join('');
+ const selectedText=qs.map((q,i)=>(answers[i]||[]).map(j=>q.opts[j][0])).flat();
+ const valueWords=[];
+ if(selectedText.some(x=>/бусдад|тус|эрүүл|сэтгэлд|амьдралд|хүнд туслах/i.test(x)))valueWords.push('Бусдад туслах');
+ if(selectedText.some(x=>/бизнес|зорилго|өсгөх|шийдвэр|санхүү|амжилт/i.test(x)))valueWords.push('Өсөлт ба санаачилга');
+ if(selectedText.some(x=>/бүтээл|дизайн|гоё|санаа|дүрслэл/i.test(x)))valueWords.push('Бүтээлч илэрхийлэл');
+ if(selectedText.some(x=>/судал|баримт|асуудал|логик|шинжлэх|тооцоо/i.test(x)))valueWords.push('Судалгаа ба асуудал шийдэх');
+ if(selectedText.some(x=>/олон улс|хэл|соёл|гадаад/i.test(x)))valueWords.push('Дэлхийтэй холбогдох');
+ if(selectedText.some(x=>/бие даа|уян хатан|өөрийн/i.test(x)))valueWords.push('Бие даасан байдал');
+ document.getElementById('profileValues').textContent=valueWords.length?`Чиний сонголтуудаас ${valueWords.slice(0,3).join(', ').toLowerCase()} зэрэг зүйлс чухал байж болохоор харагдаж байна.`:'Чиний хариултаас тодорхой үнэт зүйл ялгараагүй тул өөрт юу чухал болохыг туршлагаар судлаарай.';
+ document.getElementById('valuePills').innerHTML=(valueWords.length?valueWords:['Сонирхлоо цааш судлах']).map(x=>`<span class="pill">${x}</span>`).join('');
+ document.getElementById('interestBars').innerHTML=ranked.map(([k,v])=>`<div class="barline"><div class="barlabel"><span>${domains[k].icon} ${domains[k].name}</span><span>${Math.round(v/max*100)}%</span></div><div class="bartrack"><div class="barfill" style="width:${Math.round(v/max*100)}%"></div></div><div class="small muted">${domains[k].desc}</div></div>`).join('');
+ const careerRank=careers.map(c=>{
+  const raw=c.tags.reduce((s,t)=>s+score[t],0);
+  const maxPossible=c.tags.reduce((s,t)=>s+Math.max(1,score[t]),0);
+  const selectedHits=c.tags.reduce((s,t)=>s+count[t],0);
+  return {...c,raw,selectedHits};
+ }).sort((a,b)=>b.raw-a.raw);
+ const top=careerRank.slice(0,5);
+ document.getElementById('careerList').innerHTML=top.map((c,i)=>{
+  const matched=c.tags.filter(t=>score[t]>0).sort((a,b)=>score[b]-score[a]);
+  const why=matched.length?matched.slice(0,2).map(t=>domains[t].name.toLowerCase()).join(' болон '):'чиний хариултын зарим сонирхол';
+  const label=i===0?'Илүү өндөр давхцал':i<3?'Судалж үзэх чиглэл':'Нэмэлт хувилбар';
+  return `<article class="career"><div class="career-top"><div class="career-icon">${c.icon}</div><div><span class="label">${label}</span><h3>${c.name}</h3><p>${c.about}</p></div></div><div class="career-details"><div class="detail"><strong>Яагаад санал болгож байна вэ?</strong>Чиний ${why}-той холбоотой хариултууд энэ чиглэлтэй давхцсан.</div><div class="detail"><strong>Ямар чадвар хөгжүүлэх вэ?</strong>${c.skills}</div><div class="detail"><strong>Юуг бодитоор хийдэг вэ?</strong>${c.about}</div><div class="detail"><strong>Жижиг туршилт</strong>${c.try}</div></div></article>`;
+ }).join('');
+ document.getElementById('quiz').style.display='none';document.getElementById('results').style.display='block';window.scrollTo({top:0,behavior:'smooth'});
+}
+function restart(){answers={};page=0;document.getElementById('results').style.display='none';document.getElementById('intro').classList.remove('hidden');document.getElementById('quiz').style.display='none';window.scrollTo({top:0,behavior:'smooth'});}
+</script>
+</body>
+</html>
